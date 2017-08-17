@@ -373,7 +373,7 @@ varNames <- varNames[!varNames %in% c("isLandmark")]
 varNames1 <- paste(varNames, collapse = "+")
 #Add response variable and convert to a formula object
 svm.form <- as.formula(paste("isLandmark", varNames1, sep ="~"))
-gamma.value <- c(10^seq(-5,5, by=1))
+gamma.value <- c(10^seq(-5,-1, by=1))
 cost.value <-c(10^seq(-3,5, by=1))
 svm.df <-data.frame()
 for(g in gamma.value){
@@ -402,6 +402,18 @@ for(g in gamma.value){
 svm.model <- svm(svm.form,kernel="radial",gamma=1,cost=1000, data=trainData)
 #SURFPoints
 svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#BRISKPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#FREAKPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#HOGPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.01,cost=10000, data=trainData)
+#Morpho + SURFPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=1e+05, data=trainData)
+#Morpho + SURFPoints+BRISK
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#Combine all
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=100, data=trainData)
 #SVM + Confusion matrix
 testData$Predicted_isLandmark <- predict(svm.model, testData[,-3])
 table.svm <- table(pred = testData$Predicted_isLandmark ,
