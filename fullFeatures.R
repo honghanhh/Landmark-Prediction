@@ -14,7 +14,6 @@ library(caret)
 
 
 setwd("C:/Users/Admin/Documents/Intern/Extract feature/TrainingData")
-#setwd("C:/Users/Admin/Documents/Intern/Extract feature/H/TrainingData")
 temp = list.files(pattern="*.csv")
 
 #Function to calculate distance to bounding box
