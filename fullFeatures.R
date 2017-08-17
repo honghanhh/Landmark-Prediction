@@ -349,27 +349,77 @@ F1_score
 
 
  #SVM
- x <- subset(d, select=-isLandmark)
- d$isLandmark <- factor(d$isLandmark)
- y <- d$isLandmark
- #SVM model and show summary
- svm_model1 <- svm(x,y)
- summary(svm_model1)
- #Prediction + measure execution time in R
- pred <- predict(svm_model1,x)
- system.time(pred <- predict(svm_model1,x))
- #confusion matrix result of prediction,
- #Using command table to compare the result of SVM prediction and the class data in y variable.
- table(pred,y)
- #TUning SVM to find the best cost and gamma ..
- svm_tune <- tune(svm, train.x=x, train.y=y, kernel="radial", ranges=list(cost=10^(-1:2), gamma=c(.5,1,2)))
+#Explore data
+names(d)
+d$isLandmark <- as.factor(d$isLandmark)
+table(d$isLandmark)
+table(d$isLandmark)/length(d$isLandmark)
 
- print(svm_tune)
- #Use cost vs gamma above to create svm model again
- #Try this (svm with 5-fold cross-validation)
- svm_model_after_tune <- svm(y ~ ., data=d, kernel="radial", cost=1, gamma=0.5, cross=5)
- summary(svm_model_after_tune)
- #Prediction new model
- pred <- predict(svm_model_after_tune,x)
- system.time(predict(svm_model_after_tune,x))
- table(pred,y)
+#Split into development and validation sample
+trainData <- d[1:5160,]
+table(trainData$isLandmark)/length(trainData$isLandmark)
+testData <- d[5161:7214,]
+table(testData$isLandmark)/length(testData$isLandmark)
+
+#If target variable is factor, classification decision tree is built.
+#We can check the type of response variable.
+class(trainData$isLandmark)
+trainData$isLandmark <- as.factor(trainData$isLandmark)
+#Prepare the formula
+varNames <- names(trainData)
+#Exclude ID or Response variable
+varNames <- varNames[!varNames %in% c("isLandmark")]
+#Add + sign between exploratory variables
+varNames1 <- paste(varNames, collapse = "+")
+#Add response variable and convert to a formula object
+svm.form <- as.formula(paste("isLandmark", varNames1, sep ="~"))
+gamma.value <- c(10^seq(-5,5, by=1))
+cost.value <-c(10^seq(-3,5, by=1))
+svm.df <-data.frame()
+for(g in gamma.value){
+  for(c in cost.value){
+    # train model
+    svm.model <- svm(svm.form,kernel="radial",
+                     gamma=g,
+                     cost=c,
+                     data=trainData)
+    testData$Predicted_isLandmark <- predict(svm.model, testData[,-3])
+    table.svm <- table(pred = testData$Predicted_isLandmark ,
+                       true = testData$isLandmark)/length(testData$isLandmark)
+    table1 <- table(testData$Predicted_isLandmark , testData$isLandmark)
+    print("at value of gamma and cost = ")
+    print(g)
+    print(c)
+    #print(table.svm)
+    print(table1)
+    print("end")
+    
+  }
+}
+
+#Run SVM model again after finding the best cost and gamma
+#Only 6 morphology features
+svm.model <- svm(svm.form,kernel="radial",gamma=1,cost=1000, data=trainData)
+#SURFPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#SVM + Confusion matrix
+testData$Predicted_isLandmark <- predict(svm.model, testData[,-3])
+table.svm <- table(pred = testData$Predicted_isLandmark ,
+                   true = testData$isLandmark)/length(testData$isLandmark)
+table1 <- table(testData$Predicted_isLandmark , testData$isLandmark)
+# Create Confusion Matrix
+confusionMatrix(data=factor(testData$Predicted_isLandmark), reference=factor(testData$isLandmark),positive='1')
+
+#Calculate:
+predicted_response = as.character(testData$Predicted_isLandmark)
+predicted_response = as.numeric(predicted_response)
+isLandmark = as.character(testData$isLandmark)
+isLandmark = as.numeric(isLandmark)
+retrieved <- sum(predicted_response)
+precision <- sum(predicted_response & isLandmark) / retrieved
+recall <- sum(predicted_response & isLandmark) / sum(isLandmark)
+F1_score <- 2 * precision * recall / (precision + recall)
+#check
+precision
+recall
+F1_score 
