@@ -113,12 +113,10 @@ for i=1:length(Imgs)
                     end
                     [value index] = min(temp4);
                     landmark = [landmark;  D(index,:)];
-                    %{
                     for h = 1:length(landmark)
                         if(landmark(h-1,)==landmark(h,))
                         end                        
                     end
-                    %}
                 end
 
 

@@ -301,7 +301,7 @@ svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData
 svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
 #HOGPoints
 svm.model <- svm(svm.form,kernel="radial",gamma=0.01,cost=10000, data=trainData)
-#Morpho + SURFPointsh???i ????u
+#Morpho + SURFPoints
 svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=1e+05, data=trainData)
 #Morpho + SURFPoints+BRISK
 svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
@@ -316,15 +316,15 @@ svm.model <- svm(svm.form,kernel="radial",gamma=0.1,cost=0.001, data=trainData)
 #BRISKPoints
 svm.model <- svm(svm.form,kernel="radial",gamma=0.1,cost=0.1, data=trainData)
 #FREAKPoints
-svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+svm.model <- svm(svm.form,kernel="radial",gamma=0.1,cost=0.1, data=trainData)
 #HOGPoints
-svm.model <- svm(svm.form,kernel="radial",gamma=0.01,cost=10000, data=trainData)
-#Morpho + SURFPointsh???i ????u
-svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=1e+05, data=trainData)
+svm.model <- svm(svm.form,kernel="radial",gamma=0.1,cost=0.1, data=trainData)
+#Morpho + SURFPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.1,cost=0.1, data=trainData)
 #Morpho + SURFPoints+BRISK
-svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+svm.model <- svm(svm.form,kernel="radial",gamma=1e-04,cost=1, data=trainData)
 #Combine all
-svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=100, data=trainData)
+svm.model <- svm(svm.form,kernel="radial",gamma=0.01,cost=0.1, data=trainData)
 
 #Tune to find best cost and gamma
 # svm_tune <- tune(svm, train.x=trainData[,-3], train.y=trainData$isLandmark,
