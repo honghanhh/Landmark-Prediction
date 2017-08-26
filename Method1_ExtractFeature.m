@@ -1,14 +1,14 @@
 %load image
-Dir_img = './Internship/Dataset/';  
+Dir_img = './Data_set/';  
 Imgs = dir(fullfile(Dir_img, '*.tif'));
 %load GT
-Dir_GT = './Internship/Groundtruth/';  
+Dir_GT = './GT/';  
 gts = dir(fullfile(Dir_GT, '*.tif .csv'));
 %load data
-Dir_data = './Internship/Data/';  
+Dir_data = './TT/';  
 datas = dir(fullfile(Dir_data, '*.tif.csv'));
 %Finaldata
-Dir_final = './Internship/TrainingData/'; 
+Dir_final = './Training_data/'; 
 
 for i=1:length(Imgs)
     img_name = strsplit(Imgs(i).name, '.tif');
@@ -99,6 +99,10 @@ for i=1:length(Imgs)
                 temp4 = zeros(length(D),1);
                 temp5 = zeros(length(groundtruth),1);
                 landmark = zeros(1,2);
+                landmark(1,:) = [];
+                %landmark way 2 ~~ full 16 
+                landmark_way2 = zeros(1,2);
+                landmark_way2(1,:) = [];
                 %starting calculation
                 format long g
                 for o = 1:m4
@@ -113,22 +117,38 @@ for i=1:length(Imgs)
                     end
                     [value index] = min(temp4);
                     landmark = [landmark;  D(index,:)];
-                    %{
-                    for h = 1:length(landmark)
-                        if(landmark(h-1,)==landmark(h,))
-                        end                        
+                    %start implement lanmark full 16
+                    [m5 n5] = size(landmark_way2);
+                    % add the first value to landmark
+                    if (m5 < 1)
+                        landmark_way2 = [landmark_way2;  D(index,:)];   
+                    else
+                        %check new landmark isn't duplicate
+                        if (all(D(index,1) ~= landmark_way2(:,1)) || all(D(index,2) ~= landmark_way2(:,2)))
+                            landmark_way2 = [landmark_way2;  D(index,:)]; 
+                        else
+                           % if duplicated point is detected, check other distance to add a
+                           % new point 
+                           [value2 index2] = sort(temp4);
+                           temp5 = index2(2:10,:);
+                           for x = 1:length(temp5)
+                               if (all(D(temp5(x),1) ~= landmark_way2(:,1)) || all(D(temp5(x),2) ~= landmark_way2(:,2)))
+                                landmark_way2 = [landmark_way2;  D(temp5(x),:)]; 
+                                break
+                               end
+                           end
+
+                        end
                     end
-                    %}
+                    % end  landmark full 16
                 end
 
-
-                landmark(1,:) = [];
                 temp6 = zeros(length(D),1);
                 data = [D temp6];
 
                 for q = 1:m1
                     for p = 1:m2
-                        if(landmark(p,:) == D(q,:))   
+                        if(landmark_way2(p,:) == D(q,:))   
                             data(q,3) = 1;
                         end
                     end
@@ -141,7 +161,7 @@ for i=1:length(Imgs)
                 scatter(landmark(:,1), landmark(:,2));
                 %}
                 data = [data features im2single(feature2) features3 im2single(feature4)];
-
+                %{
                 cHeader = {'X' 'Y' 'isLandmark','SURFfeature1','SURFfeature2','SURFfeature3','SURFfeature4','SURFfeature5',...
                            'SURFfeature6','SURFfeature7','SURFfeature8','SURFfeature9','SURFfeature10','SURFfeature11',...
                            'SURFfeature12','SURFfeature13','SURFfeature14','SURFfeature15','SURFfeature16','SURFfeature17',...
@@ -184,7 +204,25 @@ for i=1:length(Imgs)
                            'FREAKfeature53','FREAKfeature54','FREAKfeature55','FREAKfeature56','FREAKfeature57',...
                            'FREAKfeature58','FREAKfeature59','FREAKfeature60','FREAKfeature61','FREAKfeature62',...
                            'FREAKfeature63','FREAKfeature64'};
-                
+                %}
+                %set name of feature to save 
+                cHeader = {'X' 'Y' 'isLandmark'};
+                cSURF= {};
+                cBRISK ={};
+                cFREAK ={};
+                cHOG  ={};
+                [num_row, num_col] = size(features);
+                [num_row1, num_col1] = size(features3); 
+                for i = 1:num_col
+                   cSURF{end+1} = strcat('SURFfeature',num2str(i));
+                   cBRISK{end+1} = strcat('BRISKfeature',num2str(i));
+                   cFREAK{end+1} = strcat('FREAKfeature',num2str(i));
+                end
+                for i = 1:num_col1
+                     cHOG{end+1} = strcat('HOGfeature',num2str(i));
+                end
+                cHeader= [cHeader cSURF  cBRISK cHOG cFREAK ];
+                 
                 commaHeader = [cHeader;repmat({','},1,numel(cHeader))];
                 commaHeader = commaHeader(:)';
                 textHeader = cell2mat(commaHeader);
@@ -202,4 +240,3 @@ for i=1:length(Imgs)
     end
 
 end
-

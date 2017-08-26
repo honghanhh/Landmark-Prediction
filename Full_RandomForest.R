@@ -13,7 +13,7 @@ library(caret)
 # library(help="randomForest")
 
 
-setwd("C:/Users/Admin/Documents/Intern/Extract feature/Internship/TrainingData")
+setwd("C:/Users/Admin/Documents/Intern/Extract feature/Internship/Training_data")
 temp = list.files(pattern="*.csv")
 
 #Function to calculate distance to bounding box
@@ -147,70 +147,70 @@ for (i in 1:length(temp)){
   temp1 = rbind(temp1, output)  
 }
 
-
-#Data
-cord <-  temp1[,c("X","Y","isLandmark")]
-morp <-  temp1[,c("Distance","UP","DOWN","LEFT","RIGHT")]
-surf <- temp1[,c("SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
-                 "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
-                 "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
-                 "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
-                 "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
-                 "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
-                 "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
-                 "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
-                 "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
-                 "SURFfeature63","SURFfeature64")]
-brisk <- temp1[,c("BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
-                  "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
-                  "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
-                  "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
-                  "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
-                  "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
-                  "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
-                  "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
-                  "BRISKfeature64")]
-
-freak <- temp1[,c("FREAKfeature1","FREAKfeature2","FREAKfeature3","FREAKfeature4","FREAKfeature5","FREAKfeature6","FREAKfeature7","FREAKfeature8",
-                  "FREAKfeature9","FREAKfeature10","FREAKfeature11","FREAKfeature12","FREAKfeature13","FREAKfeature14","FREAKfeature15",
-                  "FREAKfeature16","FREAKfeature17","FREAKfeature18","FREAKfeature19","FREAKfeature20","FREAKfeature21","FREAKfeature22",
-                  "FREAKfeature23","FREAKfeature24","FREAKfeature25","FREAKfeature26","FREAKfeature27","FREAKfeature28","FREAKfeature29",
-                  "FREAKfeature30","FREAKfeature31","FREAKfeature32","FREAKfeature33","FREAKfeature34","FREAKfeature35","FREAKfeature36",
-                  "FREAKfeature37","FREAKfeature38","FREAKfeature39","FREAKfeature40","FREAKfeature41","FREAKfeature42","FREAKfeature43",
-                  "FREAKfeature44","FREAKfeature45","FREAKfeature46","FREAKfeature47","FREAKfeature48","FREAKfeature49","FREAKfeature50",
-                  "FREAKfeature51","FREAKfeature52","FREAKfeature53","FREAKfeature54","FREAKfeature55","FREAKfeature56","FREAKfeature57",
-                  "FREAKfeature58","FREAKfeature59","FREAKfeature60","FREAKfeature61","FREAKfeature62","FREAKfeature63","FREAKfeature64")]
-
-hog <- temp1[,c( "HOGfeature1","HOGfeature2","HOGfeature3","HOGfeature4","HOGfeature5","HOGfeature6","HOGfeature7","HOGfeature8","HOGfeature9",
-                 "HOGfeature10","HOGfeature11","HOGfeature12","HOGfeature13","HOGfeature14","HOGfeature15","HOGfeature16","HOGfeature17","HOGfeature18",
-                 "HOGfeature19","HOGfeature20","HOGfeature21","HOGfeature22","HOGfeature23","HOGfeature24","HOGfeature25","HOGfeature26","HOGfeature27",
-                 "HOGfeature28","HOGfeature29","HOGfeature30","HOGfeature31","HOGfeature32","HOGfeature33","HOGfeature34","HOGfeature35","HOGfeature36")]
-
-#RANDOM FOREST
-#d <- data.frame(temp1)
-#Morphology
-d <- cbind(cord,morp)
-
-#SURFPoints
-d <- cbind(cord,surf)
-
-#Morphology + SURF 
-d <- cbind(cord,morp,surf)
-
-#BRISKPoints
-d <- cbind(cord,brisk)
-
-#FREAK
-d <- cbind(cord,freak)
-
-#HOG
-d <- cbind(cord,hog)
-
-#Morphology + SURF + BRISK
-d <- cbind(cord,morp,surf,brisk)
-
-#Morphology + SURF + BRISK + HOG + FREAK
-d <- cbind(cord,morp,surf,brisk,freak,hog)
+# 
+# #Data
+# cord <-  temp1[,c("X","Y","isLandmark")]
+# morp <-  temp1[,c("Distance","UP","DOWN","LEFT","RIGHT")]
+# surf <- temp1[,c("SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+#                  "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+#                  "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+#                  "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+#                  "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+#                  "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+#                  "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+#                  "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+#                  "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+#                  "SURFfeature63","SURFfeature64")]
+# brisk <- temp1[,c("BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+#                   "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+#                   "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+#                   "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+#                   "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+#                   "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+#                   "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+#                   "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+#                   "BRISKfeature64")]
+# 
+# freak <- temp1[,c("FREAKfeature1","FREAKfeature2","FREAKfeature3","FREAKfeature4","FREAKfeature5","FREAKfeature6","FREAKfeature7","FREAKfeature8",
+#                   "FREAKfeature9","FREAKfeature10","FREAKfeature11","FREAKfeature12","FREAKfeature13","FREAKfeature14","FREAKfeature15",
+#                   "FREAKfeature16","FREAKfeature17","FREAKfeature18","FREAKfeature19","FREAKfeature20","FREAKfeature21","FREAKfeature22",
+#                   "FREAKfeature23","FREAKfeature24","FREAKfeature25","FREAKfeature26","FREAKfeature27","FREAKfeature28","FREAKfeature29",
+#                   "FREAKfeature30","FREAKfeature31","FREAKfeature32","FREAKfeature33","FREAKfeature34","FREAKfeature35","FREAKfeature36",
+#                   "FREAKfeature37","FREAKfeature38","FREAKfeature39","FREAKfeature40","FREAKfeature41","FREAKfeature42","FREAKfeature43",
+#                   "FREAKfeature44","FREAKfeature45","FREAKfeature46","FREAKfeature47","FREAKfeature48","FREAKfeature49","FREAKfeature50",
+#                   "FREAKfeature51","FREAKfeature52","FREAKfeature53","FREAKfeature54","FREAKfeature55","FREAKfeature56","FREAKfeature57",
+#                   "FREAKfeature58","FREAKfeature59","FREAKfeature60","FREAKfeature61","FREAKfeature62","FREAKfeature63","FREAKfeature64")]
+# 
+# hog <- temp1[,c( "HOGfeature1","HOGfeature2","HOGfeature3","HOGfeature4","HOGfeature5","HOGfeature6","HOGfeature7","HOGfeature8","HOGfeature9",
+#                  "HOGfeature10","HOGfeature11","HOGfeature12","HOGfeature13","HOGfeature14","HOGfeature15","HOGfeature16","HOGfeature17","HOGfeature18",
+#                  "HOGfeature19","HOGfeature20","HOGfeature21","HOGfeature22","HOGfeature23","HOGfeature24","HOGfeature25","HOGfeature26","HOGfeature27",
+#                  "HOGfeature28","HOGfeature29","HOGfeature30","HOGfeature31","HOGfeature32","HOGfeature33","HOGfeature34","HOGfeature35","HOGfeature36")]
+# 
+# #RANDOM FOREST
+# #d <- data.frame(temp1)
+# #Morphology
+# d <- cbind(cord,morp)
+# 
+# #SURFPoints
+# d <- cbind(cord,surf)
+# 
+# #Morphology + SURF 
+# d <- cbind(cord,morp,surf)
+# 
+# #BRISKPoints
+# d <- cbind(cord,brisk)
+# 
+# #FREAK
+# d <- cbind(cord,freak)
+# 
+# #HOG
+# d <- cbind(cord,hog)
+# 
+# #Morphology + SURF + BRISK
+# d <- cbind(cord,morp,surf,brisk)
+# 
+# #Morphology + SURF + BRISK + HOG + FREAK
+# d <- cbind(cord,morp,surf,brisk,freak,hog)
 
 #RANDOM FOREST
 names(d)
@@ -221,29 +221,221 @@ table(d$isLandmark)/nrow(d)
 #70% observations take value "no".
 
 #Split to Training and Testing data
-# ind <- sample(2,nrow(d),replace=TRUE,prob=c(0.7,0.3))
-# trainData <- d[ind==1,]
-# testData <- d[ind==2,]
-#trainData <- d[1:5160,]
-trainData <- d[1:5382,]
-table(trainData$isLandmark)/nrow(trainData)
-temp_Landmark= subset(trainData, isLandmark==1)
-temp_notLandmark= subset(trainData, isLandmark!=1)
+
+trainData1 <- temp1[1:5382,]
+testData1 <- temp1[5383:7214,]
+
+#Oversampling data, 50:50
+#trainData
+table(trainData1$isLandmark)/nrow(trainData1)
+temp_Landmark= subset(trainData1, isLandmark==1)
+temp_notLandmark= subset(trainData1, isLandmark!=1)
 a <- temp_Landmark[sample(nrow(temp_Landmark),
                           size=( nrow(temp_notLandmark) - nrow(temp_Landmark)),
                           replace=TRUE),]
-trainData<-rbind(trainData, a)
-table(trainData$isLandmark)/nrow(trainData)
+trainData1<-rbind(trainData1, a)
+table(trainData1$isLandmark)/nrow(trainData1)
 
-#testData <- d[5161:7214,]
-testData <- d[5383:7214,]
-temp_Landmark1= subset(testData, isLandmark==1)
-temp_notLandmark1= subset(testData, isLandmark!=1)
+#testData
+temp_Landmark1= subset(testData1, isLandmark==1)
+temp_notLandmark1= subset(testData1, isLandmark!=1)
 a <- temp_Landmark1[sample(nrow(temp_Landmark1),
                            size=( nrow(temp_notLandmark1) - nrow(temp_Landmark1)),
                            replace=TRUE),]
-testData<-rbind(testData, a)
-table(testData$isLandmark)/nrow(testData)
+testData1<-rbind(testData1, a)
+table(testData1$isLandmark)/nrow(testData1)
+
+
+#Morphology
+trainData <- trainData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT")]
+testData <- testData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT")]
+##SURFPoints
+trainData <- trainData1[,c("X","Y","isLandmark","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                           "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                           "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                           "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                           "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                           "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                           "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                           "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                           "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                           "SURFfeature63","SURFfeature64")]
+testData <- testData1[,c("X","Y","isLandmark","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                         "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                         "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                         "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                         "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                         "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                         "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                         "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                         "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                         "SURFfeature63","SURFfeature64")]
+#BRISKPoints
+trainData <- trainData1[,c("X","Y","isLandmark","BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+                           "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+                           "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+                           "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+                           "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+                           "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+                           "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+                           "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+                           "BRISKfeature64")]
+testData <- testData1[,c("X","Y","isLandmark","BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+                         "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+                         "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+                         "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+                         "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+                         "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+                         "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+                         "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+                         "BRISKfeature64")]
+#FREAKPoints
+trainData <- trainData1[,c("X","Y","isLandmark","FREAKfeature1","FREAKfeature2","FREAKfeature3","FREAKfeature4","FREAKfeature5","FREAKfeature6","FREAKfeature7","FREAKfeature8",
+                           "FREAKfeature9","FREAKfeature10","FREAKfeature11","FREAKfeature12","FREAKfeature13","FREAKfeature14","FREAKfeature15",
+                           "FREAKfeature16","FREAKfeature17","FREAKfeature18","FREAKfeature19","FREAKfeature20","FREAKfeature21","FREAKfeature22",
+                           "FREAKfeature23","FREAKfeature24","FREAKfeature25","FREAKfeature26","FREAKfeature27","FREAKfeature28","FREAKfeature29",
+                           "FREAKfeature30","FREAKfeature31","FREAKfeature32","FREAKfeature33","FREAKfeature34","FREAKfeature35","FREAKfeature36",
+                           "FREAKfeature37","FREAKfeature38","FREAKfeature39","FREAKfeature40","FREAKfeature41","FREAKfeature42","FREAKfeature43",
+                           "FREAKfeature44","FREAKfeature45","FREAKfeature46","FREAKfeature47","FREAKfeature48","FREAKfeature49","FREAKfeature50",
+                           "FREAKfeature51","FREAKfeature52","FREAKfeature53","FREAKfeature54","FREAKfeature55","FREAKfeature56","FREAKfeature57",
+                           "FREAKfeature58","FREAKfeature59","FREAKfeature60","FREAKfeature61","FREAKfeature62","FREAKfeature63","FREAKfeature64")]
+testData <- testData1[,c("X","Y","isLandmark","FREAKfeature1","FREAKfeature2","FREAKfeature3","FREAKfeature4","FREAKfeature5","FREAKfeature6","FREAKfeature7","FREAKfeature8",
+                         "FREAKfeature9","FREAKfeature10","FREAKfeature11","FREAKfeature12","FREAKfeature13","FREAKfeature14","FREAKfeature15",
+                         "FREAKfeature16","FREAKfeature17","FREAKfeature18","FREAKfeature19","FREAKfeature20","FREAKfeature21","FREAKfeature22",
+                         "FREAKfeature23","FREAKfeature24","FREAKfeature25","FREAKfeature26","FREAKfeature27","FREAKfeature28","FREAKfeature29",
+                         "FREAKfeature30","FREAKfeature31","FREAKfeature32","FREAKfeature33","FREAKfeature34","FREAKfeature35","FREAKfeature36",
+                         "FREAKfeature37","FREAKfeature38","FREAKfeature39","FREAKfeature40","FREAKfeature41","FREAKfeature42","FREAKfeature43",
+                         "FREAKfeature44","FREAKfeature45","FREAKfeature46","FREAKfeature47","FREAKfeature48","FREAKfeature49","FREAKfeature50",
+                         "FREAKfeature51","FREAKfeature52","FREAKfeature53","FREAKfeature54","FREAKfeature55","FREAKfeature56","FREAKfeature57",
+                         "FREAKfeature58","FREAKfeature59","FREAKfeature60","FREAKfeature61","FREAKfeature62","FREAKfeature63","FREAKfeature64")]
+#HOGPoints
+trainData <- trainData1[,c("X","Y","isLandmark","HOGfeature1","HOGfeature2","HOGfeature3","HOGfeature4","HOGfeature5","HOGfeature6","HOGfeature7","HOGfeature8","HOGfeature9",
+                           "HOGfeature10","HOGfeature11","HOGfeature12","HOGfeature13","HOGfeature14","HOGfeature15","HOGfeature16","HOGfeature17","HOGfeature18",
+                           "HOGfeature19","HOGfeature20","HOGfeature21","HOGfeature22","HOGfeature23","HOGfeature24","HOGfeature25","HOGfeature26","HOGfeature27",
+                           "HOGfeature28","HOGfeature29","HOGfeature30","HOGfeature31","HOGfeature32","HOGfeature33","HOGfeature34","HOGfeature35","HOGfeature36")]
+testData <- testData1[,c("X","Y","isLandmark","HOGfeature1","HOGfeature2","HOGfeature3","HOGfeature4","HOGfeature5","HOGfeature6","HOGfeature7","HOGfeature8","HOGfeature9",
+                         "HOGfeature10","HOGfeature11","HOGfeature12","HOGfeature13","HOGfeature14","HOGfeature15","HOGfeature16","HOGfeature17","HOGfeature18",
+                         "HOGfeature19","HOGfeature20","HOGfeature21","HOGfeature22","HOGfeature23","HOGfeature24","HOGfeature25","HOGfeature26","HOGfeature27",
+                         "HOGfeature28","HOGfeature29","HOGfeature30","HOGfeature31","HOGfeature32","HOGfeature33","HOGfeature34","HOGfeature35","HOGfeature36")]
+#Morph + SURF
+trainData <- trainData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                           "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                           "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                           "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                           "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                           "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                           "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                           "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                           "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                           "SURFfeature63","SURFfeature64")]
+testData <- testData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                         "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                         "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                         "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                         "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                         "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                         "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                         "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                         "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                         "SURFfeature63","SURFfeature64")]
+#Morphology + SURF + BRISK
+trainData <- trainData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                           "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                           "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                           "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                           "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                           "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                           "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                           "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                           "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                           "SURFfeature63","SURFfeature64","BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+                           "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+                           "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+                           "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+                           "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+                           "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+                           "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+                           "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+                           "BRISKfeature64")]
+testData <- testData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                         "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                         "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                         "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                         "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                         "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                         "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                         "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                         "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                         "SURFfeature63","SURFfeature64","BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+                         "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+                         "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+                         "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+                         "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+                         "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+                         "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+                         "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+                         "BRISKfeature64")]
+#Morphology + SURF + BRISK + HOG + FREAK
+trainData <- trainData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                           "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                           "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                           "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                           "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                           "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                           "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                           "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                           "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                           "SURFfeature63","SURFfeature64","BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+                           "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+                           "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+                           "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+                           "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+                           "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+                           "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+                           "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+                           "BRISKfeature64","HOGfeature1","HOGfeature2","HOGfeature3","HOGfeature4","HOGfeature5","HOGfeature6","HOGfeature7","HOGfeature8","HOGfeature9",
+                           "HOGfeature10","HOGfeature11","HOGfeature12","HOGfeature13","HOGfeature14","HOGfeature15","HOGfeature16","HOGfeature17","HOGfeature18",
+                           "HOGfeature19","HOGfeature20","HOGfeature21","HOGfeature22","HOGfeature23","HOGfeature24","HOGfeature25","HOGfeature26","HOGfeature27",
+                           "HOGfeature28","HOGfeature29","HOGfeature30","HOGfeature31","HOGfeature32","HOGfeature33","HOGfeature34","HOGfeature35","HOGfeature36",
+                           "FREAKfeature1","FREAKfeature2","FREAKfeature3","FREAKfeature4","FREAKfeature5","FREAKfeature6","FREAKfeature7","FREAKfeature8",
+                           "FREAKfeature9","FREAKfeature10","FREAKfeature11","FREAKfeature12","FREAKfeature13","FREAKfeature14","FREAKfeature15",
+                           "FREAKfeature16","FREAKfeature17","FREAKfeature18","FREAKfeature19","FREAKfeature20","FREAKfeature21","FREAKfeature22",
+                           "FREAKfeature23","FREAKfeature24","FREAKfeature25","FREAKfeature26","FREAKfeature27","FREAKfeature28","FREAKfeature29",
+                           "FREAKfeature30","FREAKfeature31","FREAKfeature32","FREAKfeature33","FREAKfeature34","FREAKfeature35","FREAKfeature36",
+                           "FREAKfeature37","FREAKfeature38","FREAKfeature39","FREAKfeature40","FREAKfeature41","FREAKfeature42","FREAKfeature43",
+                           "FREAKfeature44","FREAKfeature45","FREAKfeature46","FREAKfeature47","FREAKfeature48","FREAKfeature49","FREAKfeature50",
+                           "FREAKfeature51","FREAKfeature52","FREAKfeature53","FREAKfeature54","FREAKfeature55","FREAKfeature56","FREAKfeature57",
+                           "FREAKfeature58","FREAKfeature59","FREAKfeature60","FREAKfeature61","FREAKfeature62","FREAKfeature63","FREAKfeature64")]
+testData <- testData1[,c("X","Y","isLandmark","Distance","UP","DOWN","LEFT","RIGHT","SURFfeature1","SURFfeature2","SURFfeature3","SURFfeature4","SURFfeature5","SURFfeature6",
+                         "SURFfeature7","SURFfeature8","SURFfeature9","SURFfeature10","SURFfeature11","SURFfeature12","SURFfeature13",
+                         "SURFfeature14","SURFfeature15","SURFfeature16","SURFfeature17","SURFfeature18","SURFfeature19","SURFfeature20",
+                         "SURFfeature21","SURFfeature22","SURFfeature23","SURFfeature24","SURFfeature25","SURFfeature26","SURFfeature27",
+                         "SURFfeature28","SURFfeature29","SURFfeature30","SURFfeature31","SURFfeature32","SURFfeature33","SURFfeature34",
+                         "SURFfeature35","SURFfeature36","SURFfeature37","SURFfeature38","SURFfeature39","SURFfeature40","SURFfeature41",
+                         "SURFfeature42","SURFfeature43","SURFfeature44","SURFfeature45","SURFfeature46","SURFfeature47","SURFfeature48",
+                         "SURFfeature49","SURFfeature50","SURFfeature51","SURFfeature52","SURFfeature53","SURFfeature54","SURFfeature55",
+                         "SURFfeature56","SURFfeature57","SURFfeature58","SURFfeature59","SURFfeature60","SURFfeature61","SURFfeature62",
+                         "SURFfeature63","SURFfeature64","BRISKfeature1","BRISKfeature2","BRISKfeature3","BRISKfeature4","BRISKfeature5","BRISKfeature6","BRISKfeature7",
+                         "BRISKfeature8","BRISKfeature9","BRISKfeature10","BRISKfeature11","BRISKfeature12","BRISKfeature13","BRISKfeature14","BRISKfeature15",
+                         "BRISKfeature16","BRISKfeature17","BRISKfeature18","BRISKfeature19","BRISKfeature20","BRISKfeature21","BRISKfeature22","BRISKfeature23",
+                         "BRISKfeature24","BRISKfeature25","BRISKfeature26","BRISKfeature27","BRISKfeature28","BRISKfeature29","BRISKfeature30","BRISKfeature31",
+                         "BRISKfeature32","BRISKfeature33","BRISKfeature34","BRISKfeature35","BRISKfeature36","BRISKfeature37","BRISKfeature38","BRISKfeature39",
+                         "BRISKfeature40","BRISKfeature41","BRISKfeature42","BRISKfeature43","BRISKfeature44","BRISKfeature45","BRISKfeature46","BRISKfeature47",
+                         "BRISKfeature48","BRISKfeature49","BRISKfeature50","BRISKfeature51","BRISKfeature52","BRISKfeature53","BRISKfeature54","BRISKfeature55",
+                         "BRISKfeature56","BRISKfeature57","BRISKfeature58","BRISKfeature59","BRISKfeature60","BRISKfeature61","BRISKfeature62","BRISKfeature63",
+                         "BRISKfeature64","HOGfeature1","HOGfeature2","HOGfeature3","HOGfeature4","HOGfeature5","HOGfeature6","HOGfeature7","HOGfeature8","HOGfeature9",
+                         "HOGfeature10","HOGfeature11","HOGfeature12","HOGfeature13","HOGfeature14","HOGfeature15","HOGfeature16","HOGfeature17","HOGfeature18",
+                         "HOGfeature19","HOGfeature20","HOGfeature21","HOGfeature22","HOGfeature23","HOGfeature24","HOGfeature25","HOGfeature26","HOGfeature27",
+                         "HOGfeature28","HOGfeature29","HOGfeature30","HOGfeature31","HOGfeature32","HOGfeature33","HOGfeature34","HOGfeature35","HOGfeature36",
+                         "FREAKfeature1","FREAKfeature2","FREAKfeature3","FREAKfeature4","FREAKfeature5","FREAKfeature6","FREAKfeature7","FREAKfeature8",
+                         "FREAKfeature9","FREAKfeature10","FREAKfeature11","FREAKfeature12","FREAKfeature13","FREAKfeature14","FREAKfeature15",
+                         "FREAKfeature16","FREAKfeature17","FREAKfeature18","FREAKfeature19","FREAKfeature20","FREAKfeature21","FREAKfeature22",
+                         "FREAKfeature23","FREAKfeature24","FREAKfeature25","FREAKfeature26","FREAKfeature27","FREAKfeature28","FREAKfeature29",
+                         "FREAKfeature30","FREAKfeature31","FREAKfeature32","FREAKfeature33","FREAKfeature34","FREAKfeature35","FREAKfeature36",
+                         "FREAKfeature37","FREAKfeature38","FREAKfeature39","FREAKfeature40","FREAKfeature41","FREAKfeature42","FREAKfeature43",
+                         "FREAKfeature44","FREAKfeature45","FREAKfeature46","FREAKfeature47","FREAKfeature48","FREAKfeature49","FREAKfeature50",
+                         "FREAKfeature51","FREAKfeature52","FREAKfeature53","FREAKfeature54","FREAKfeature55","FREAKfeature56","FREAKfeature57",
+                         "FREAKfeature58","FREAKfeature59","FREAKfeature60","FREAKfeature61","FREAKfeature62","FREAKfeature63","FREAKfeature64")]
 
 #If target variable is factor, classification decision tree is built.
 #We can check the type of response variable.
@@ -260,8 +452,8 @@ varNames1 <- paste(varNames, collapse = "+")
 rf.form <- as.formula(paste("isLandmark", varNames1, sep ="~"))
 
 #Building Random forest model
-#200 decision trees or a forest has been built using the Random Forest algorithm based learning
-d_rf <- randomForest(rf.form, trainData, ntree=200, importance = T)
+#decision trees or a forest has been built using the Random Forest algorithm based learning
+d_rf <- randomForest(rf.form, trainData, ntree=600, importance = T)
 
 # Print Random Forest to see the importance features
 print(d_rf)
@@ -317,7 +509,7 @@ b= subset(data, predicted_response==1)
 b= cbind(b$X, b$Y)
 c= subset(data, isLandmark==1)
 c= cbind(c$X, c$Y)
-plot(c(1,1),xlim=c(-0,1800),ylim=c(0,1500))
+plot(c(1,1),xlim=c(0,1800),ylim=c(0,1500))
 points(a,pch =1, col="red",cex = 1.5)
 points(b,pch =3, col="black",cex = 1.5)
 points(c,pch =1, col="blue",cex = 1.5)
