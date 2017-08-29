@@ -413,23 +413,23 @@ print(svm.model)
   }
 }
 
-# #Run SVM model again after finding the best cost and gamma
-# #Only 6 morphology features
-# svm.model <- svm(svm.form,kernel="radial",gamma=1,cost=1000, data=trainData)
-# #SURFPoints
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
-# #BRISKPoints
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
-# #FREAKPoints
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
-# #HOGPoints
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.01,cost=10000, data=trainData)
-# #Morpho + SURFPoints
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=1e+05, data=trainData)
-# #Morpho + SURFPoints+BRISK
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
-# #Combine all
-# svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=100, data=trainData)
+ #Run SVM model again after finding the best cost and gamma
+#Only 6 morphology features
+ svm.model <- svm(svm.form,kernel="radial",gamma=1,cost=1000, data=trainData)
+#SURFPoints
+ svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#BRISKPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#FREAKPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#HOGPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.01,cost=10000, data=trainData)
+#Morpho + SURFPoints
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=1e+05, data=trainData)
+#Morpho + SURFPoints+BRISK
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=10000, data=trainData)
+#Combine all
+svm.model <- svm(svm.form,kernel="radial",gamma=0.001,cost=100, data=trainData)
 
 # #Oversampling
 # #Only 6 morphology features
